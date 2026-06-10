@@ -6,9 +6,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.example.datingapp.navigation.Screen
-import com.example.datingapp.screens.LoginScreen
-import com.example.datingapp.screens.MainScreen
-import com.example.datingapp.screens.RegisterScreen
+import com.example.datingapp.screens.login.LoginScreen
+import com.example.datingapp.screens.main.MainScreen
+import com.example.datingapp.screens.register.RegisterScreen
 import com.example.datingapp.screens.SplashScreen
 import com.example.datingapp.ui.theme.DatingAppTheme
 

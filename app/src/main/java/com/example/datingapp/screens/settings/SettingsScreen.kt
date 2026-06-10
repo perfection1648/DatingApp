@@ -1,4 +1,4 @@
-package com.example.datingapp.screens
+package com.example.datingapp.screens.settings
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer

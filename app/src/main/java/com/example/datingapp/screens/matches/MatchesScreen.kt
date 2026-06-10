@@ -1,4 +1,4 @@
-package com.example.datingapp.screens
+package com.example.datingapp.screens.matches
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.datingapp.components.AppButton
 import com.example.datingapp.components.AppScreen
-import com.example.datingapp.components.AppTopBar
+
 @Composable
 fun MatchesScreen(
 

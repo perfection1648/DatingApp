@@ -1,9 +1,8 @@
-package com.example.datingapp.screens
+package com.example.datingapp.screens.main
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -13,31 +12,28 @@ import androidx.compose.ui.Modifier
 import com.example.datingapp.components.AppMainScreen
 import com.example.datingapp.navigation.MainDestination
 import com.example.datingapp.navigation.MainTab
+import com.example.datingapp.screens.ProfileSetup.ProfileSetupScreen
+import com.example.datingapp.screens.settings.SettingsScreen
+import com.example.datingapp.screens.chat.ChatScreen
+import com.example.datingapp.screens.feed.FeedScreen
+import com.example.datingapp.screens.matches.MatchesScreen
+import com.example.datingapp.screens.profile.ProfileScreen
+
 @Composable
 fun MainScreen(){
-    var currentDestination by remember {
-        mutableStateOf(MainDestination.Profile)
-    }
-
-    val selectedTab = when (currentDestination) {
-        MainDestination.Feed -> MainTab.Feed
-        MainDestination.Matches -> MainTab.Matches
-        MainDestination.Chat -> MainTab.Chat
-        MainDestination.Profile -> MainTab.Profile
-
-        MainDestination.ProfileSetup -> MainTab.Profile
-        MainDestination.Settings -> MainTab.Profile
+    var uiState by remember {
+        mutableStateOf(MainUiState())
     }
 
     AppMainScreen(
-        selectedTab = selectedTab,
+        selectedTab = uiState.selectedTab,
         onTabClick = {
-            tab -> currentDestination = when(tab) {
+            tab -> uiState = uiState.copy(currentDestination = when(tab) {
                 MainTab.Feed -> MainDestination.Feed
                 MainTab.Matches -> MainDestination.Matches
                 MainTab.Chat -> MainDestination.Chat
                 MainTab.Profile -> MainDestination.Profile
-            }
+            })
         }
     ) { innerPadding ->
         Box(
@@ -45,14 +41,18 @@ fun MainScreen(){
                 .fillMaxSize()
                 .padding(innerPadding)
         ){
-            when(currentDestination){
+            when(uiState.currentDestination){
                 MainDestination.Feed -> {
                     FeedScreen(
                         onMatchesClick = {
-                            currentDestination = MainDestination.Matches
+                            uiState = uiState.copy(
+                                currentDestination = MainDestination.Matches
+                            )
                         },
                         onProfileClick = {
-                            currentDestination = MainDestination.Profile
+                            uiState = uiState.copy(
+                                currentDestination = MainDestination.Profile
+                            )
                         }
                     )
                 }
@@ -60,7 +60,9 @@ fun MainScreen(){
                 MainDestination.Matches -> {
                     MatchesScreen(
                         onChatClick = {
-                            currentDestination = MainDestination.Chat
+                            uiState = uiState.copy(
+                                currentDestination =  MainDestination.Chat
+                            )
                         }
                     )
                 }
@@ -72,10 +74,14 @@ fun MainScreen(){
                 MainDestination.Profile -> {
                     ProfileScreen(
                         onEditProfileClick = {
-                            currentDestination = MainDestination.ProfileSetup
+                            uiState = uiState.copy(
+                                currentDestination = MainDestination.Profile
+                            )
                         },
                         onSettingsClick = {
-                            currentDestination = MainDestination.Settings
+                            uiState = uiState.copy(
+                                currentDestination = MainDestination.Settings
+                            )
                         }
                     )
                 }
@@ -83,7 +89,9 @@ fun MainScreen(){
                 MainDestination.ProfileSetup -> {
                     ProfileSetupScreen(
                         onBackClick = {
-                            currentDestination = MainDestination.Profile
+                            uiState = uiState.copy(
+                                currentDestination = MainDestination.Profile
+                            )
                         }
                     )
                 }
@@ -91,7 +99,9 @@ fun MainScreen(){
                 MainDestination.Settings -> {
                     SettingsScreen(
                         onBackClick = {
-                            currentDestination = MainDestination.Profile
+                            uiState = uiState.copy(
+                                currentDestination = MainDestination.Profile
+                            )
                         }
                     )
                 }

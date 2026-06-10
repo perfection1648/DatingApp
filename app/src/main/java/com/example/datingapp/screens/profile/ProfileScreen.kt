@@ -1,4 +1,4 @@
-package com.example.datingapp.screens
+package com.example.datingapp.screens.profile
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -16,7 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.datingapp.components.AppButton
 import com.example.datingapp.components.AppScreen
 import androidx.compose.foundation.layout.PaddingValues
 @Composable

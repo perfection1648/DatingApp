@@ -1,4 +1,4 @@
-package com.example.datingapp.screens
+package com.example.datingapp.screens.feed
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height

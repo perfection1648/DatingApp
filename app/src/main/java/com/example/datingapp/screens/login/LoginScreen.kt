@@ -1,10 +1,9 @@
-package com.example.datingapp.screens
+package com.example.datingapp.screens.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,10 +18,10 @@ import com.example.datingapp.components.AppTextButton
 import com.example.datingapp.components.AppTextField
 
 @Composable
-fun RegisterScreen(
-    onRegisterClick: () -> Unit,
-    onBackClick: () -> Unit
-){
+fun LoginScreen(
+    onLoginClick: () -> Unit,
+    onRegisterClick: () -> Unit
+) {
     var email by remember {
         mutableStateOf("")
     }
@@ -31,20 +30,20 @@ fun RegisterScreen(
         mutableStateOf("")
     }
 
-    AppScreen (
+    AppScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        Text(text = "Регистрация")
+        Text(text = "Вход")
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         AppTextField(
             value = email,
             onValueChange = {
                 email = it
             },
-            label = "Email"
+            label = "email"
         )
 
         Spacer(modifier = Modifier.height(12.dp))
@@ -60,17 +59,21 @@ fun RegisterScreen(
         Spacer(modifier = Modifier.height(8.dp))
 
         AppButton(
-            text = "Зарегистрироваться",
-            onClick = onRegisterClick
+            text = "Войти",
+            onClick = {
+                println("Войти: $email")
+                onLoginClick()
+            }
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
         AppTextButton(
-            text = "Уже есть аккаунт?Войти",
-            onClick = onBackClick
+            text = "Создать аккаунт",
+            onClick = {
+                onRegisterClick()
+            }
         )
-
 
 
     }

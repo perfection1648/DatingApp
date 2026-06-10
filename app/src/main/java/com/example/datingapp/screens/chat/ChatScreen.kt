@@ -1,4 +1,4 @@
-package com.example.datingapp.screens
+package com.example.datingapp.screens.chat
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -9,7 +9,6 @@ import androidx.compose.ui.unit.dp
 import com.example.datingapp.components.AppButton
 import com.example.datingapp.components.AppScreen
 import com.example.datingapp.components.AppTextField
-import com.example.datingapp.components.AppTopBar
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
