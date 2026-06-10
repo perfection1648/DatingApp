@@ -7,5 +7,4 @@ enum class MainTab(
     Matches("Мэтчи"),
     Chat("Чат"),
     Profile("Профиль"),
-    ProfileSetup("Настрйоки")
 }

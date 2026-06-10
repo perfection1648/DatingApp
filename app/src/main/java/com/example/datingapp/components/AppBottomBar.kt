@@ -82,21 +82,5 @@ fun AppBottomBar(
                 Text(text = "Профиль")
             }
         )
-
-        NavigationBarItem(
-            selected = selectedTab == MainTab.ProfileSetup,
-            onClick = {
-                onTabClick(MainTab.ProfileSetup)
-            },
-            icon = {
-                Icon(
-                    imageVector = Icons.Default.Settings,
-                    contentDescription = "Настройки"
-                )
-            },
-            label = {
-                Text(text = "Настройки")
-            }
-        )
     }
 }

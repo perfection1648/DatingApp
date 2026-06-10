@@ -11,17 +11,33 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.example.datingapp.components.AppMainScreen
+import com.example.datingapp.navigation.MainDestination
 import com.example.datingapp.navigation.MainTab
 @Composable
 fun MainScreen(){
-    var selectedTab by remember {
-        mutableStateOf(MainTab.Feed)
+    var currentDestination by remember {
+        mutableStateOf(MainDestination.Profile)
+    }
+
+    val selectedTab = when (currentDestination) {
+        MainDestination.Feed -> MainTab.Feed
+        MainDestination.Matches -> MainTab.Matches
+        MainDestination.Chat -> MainTab.Chat
+        MainDestination.Profile -> MainTab.Profile
+
+        MainDestination.ProfileSetup -> MainTab.Profile
+        MainDestination.Settings -> MainTab.Profile
     }
 
     AppMainScreen(
         selectedTab = selectedTab,
         onTabClick = {
-            tab -> selectedTab = tab
+            tab -> currentDestination = when(tab) {
+                MainTab.Feed -> MainDestination.Feed
+                MainTab.Matches -> MainDestination.Matches
+                MainTab.Chat -> MainDestination.Chat
+                MainTab.Profile -> MainDestination.Profile
+            }
         }
     ) { innerPadding ->
         Box(
@@ -29,36 +45,55 @@ fun MainScreen(){
                 .fillMaxSize()
                 .padding(innerPadding)
         ){
-            when(selectedTab){
-                MainTab.Feed -> {
+            when(currentDestination){
+                MainDestination.Feed -> {
                     FeedScreen(
                         onMatchesClick = {
-                            selectedTab = MainTab.Matches
+                            currentDestination = MainDestination.Matches
                         },
                         onProfileClick = {
-                            selectedTab = MainTab.Profile
+                            currentDestination = MainDestination.Profile
                         }
                     )
                 }
 
-                MainTab.Matches -> {
+                MainDestination.Matches -> {
                     MatchesScreen(
                         onChatClick = {
-                            selectedTab = MainTab.Chat
+                            currentDestination = MainDestination.Chat
                         }
                     )
                 }
 
-                MainTab.Chat -> {
+                MainDestination.Chat -> {
                     ChatScreen()
                 }
 
-                MainTab.Profile -> {
-                    ProfileScreen()
+                MainDestination.Profile -> {
+                    ProfileScreen(
+                        onEditProfileClick = {
+                            currentDestination = MainDestination.ProfileSetup
+                        },
+                        onSettingsClick = {
+                            currentDestination = MainDestination.Settings
+                        }
+                    )
                 }
 
-                MainTab.ProfileSetup -> {
-                    ProfileSetupScreen()
+                MainDestination.ProfileSetup -> {
+                    ProfileSetupScreen(
+                        onBackClick = {
+                            currentDestination = MainDestination.Profile
+                        }
+                    )
+                }
+
+                MainDestination.Settings -> {
+                    SettingsScreen(
+                        onBackClick = {
+                            currentDestination = MainDestination.Profile
+                        }
+                    )
                 }
             }
         }
