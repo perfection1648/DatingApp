@@ -34,7 +34,7 @@ class FeedStateHolder {
 
         uiState = if (match != null) {
             uiState.copy(
-                matchName = match.profile.name,
+                matchName = match.matchProfile.name,
                 profiles = datingRepository.getProfiles(),
                 currentIndex = 0
             )

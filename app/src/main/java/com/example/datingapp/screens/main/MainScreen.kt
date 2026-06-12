@@ -15,6 +15,7 @@ import com.example.datingapp.navigation.MainTab
 import com.example.datingapp.screens.ProfileSetup.ProfileSetupScreen
 import com.example.datingapp.screens.settings.SettingsScreen
 import com.example.datingapp.screens.chat.ChatScreen
+import com.example.datingapp.screens.chat.ConversationScreen
 import com.example.datingapp.screens.feed.FeedScreen
 import com.example.datingapp.screens.matches.MatchesScreen
 import com.example.datingapp.screens.profile.ProfileScreen
@@ -63,7 +64,14 @@ fun MainScreen(){
                 }
 
                 MainDestination.Chat -> {
-                    ChatScreen()
+                    ChatScreen(
+                        onChatClick = { matchId ->
+                            uiState = uiState.copy(
+                                currentDestination = MainDestination.Conversation,
+                                chatMatchId = matchId
+                            )
+                        }
+                    )
                 }
 
                 MainDestination.Profile -> {
@@ -96,6 +104,17 @@ fun MainScreen(){
                         onBackClick = {
                             uiState = uiState.copy(
                                 currentDestination = MainDestination.Profile
+                            )
+                        }
+                    )
+                }
+
+                MainDestination.Conversation -> {
+                    ConversationScreen(
+                        matchId = uiState.chatMatchId,
+                        onBackClick = {
+                            uiState = uiState.copy(
+                                currentDestination = MainDestination.Chat
                             )
                         }
                     )

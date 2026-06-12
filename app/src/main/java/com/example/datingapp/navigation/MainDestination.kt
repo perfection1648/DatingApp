@@ -6,5 +6,6 @@ enum class MainDestination {
     Chat,
     Profile,
     ProfileSetup,
-    Settings
+    Settings,
+    Conversation
 }

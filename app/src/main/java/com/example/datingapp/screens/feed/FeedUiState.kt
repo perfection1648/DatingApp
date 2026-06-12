@@ -1,7 +1,6 @@
 package com.example.datingapp.screens.feed
 
 import com.example.datingapp.models.DatingProfile
-import com.example.datingapp.models.UserProfile
 
 data class FeedUiState(
     val profiles: List<DatingProfile> = emptyList(),
