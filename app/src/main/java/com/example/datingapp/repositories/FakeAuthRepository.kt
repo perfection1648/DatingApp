@@ -24,11 +24,10 @@ class FakeAuthRepository: AuthRepository {
     }
 
     override fun register(
-        name: String,
         email: String,
         password: String
     ): Boolean {
-        if (email.isBlank() || password.isBlank() || name.isBlank()) {
+        if (email.isBlank() || password.isBlank()) {
             return false
         }
 

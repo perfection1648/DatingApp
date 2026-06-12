@@ -3,8 +3,10 @@ package com.example.datingapp.screens.login
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,12 +24,13 @@ fun LoginScreen(
     onLoginClick: () -> Unit,
     onRegisterClick: () -> Unit
 ) {
-    var email by remember {
-        mutableStateOf("")
-    }
+    val stateHolder = remember { LoginStateHolder() }
+    val state = stateHolder.uiState
 
-    var password by remember {
-        mutableStateOf("")
+    LaunchedEffect(state.isLoggedIn) {
+        if (state.isLoggedIn) {
+            onLoginClick()
+        }
     }
 
     AppScreen(
@@ -39,31 +42,32 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(12.dp))
 
         AppTextField(
-            value = email,
-            onValueChange = {
-                email = it
-            },
+            value = state.email,
+            onValueChange = stateHolder :: onEmailChange,
             label = "email"
         )
 
         Spacer(modifier = Modifier.height(12.dp))
 
         AppTextField(
-            value = password,
-            onValueChange = {
-                password = it
-            },
+            value = state.password,
+            onValueChange = stateHolder :: onPasswordChange,
             label = "Пароль"
         )
+        if(state.errorMessage != null) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = state.errorMessage,
+                color = MaterialTheme.colorScheme.error
+            )
+        }
 
         Spacer(modifier = Modifier.height(8.dp))
 
         AppButton(
-            text = "Войти",
-            onClick = {
-                println("Войти: $email")
-                onLoginClick()
-            }
+            text = if (state.isLoading) "Входим..." else "Войти",
+            onClick = stateHolder :: onLoginClick,
+            enabled = !state.isLoading
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -72,7 +76,8 @@ fun LoginScreen(
             text = "Создать аккаунт",
             onClick = {
                 onRegisterClick()
-            }
+            },
+            enabled = !state.isLoading
         )
 
 

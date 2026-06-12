@@ -48,11 +48,6 @@ fun MainScreen(){
                             uiState = uiState.copy(
                                 currentDestination = MainDestination.Matches
                             )
-                        },
-                        onProfileClick = {
-                            uiState = uiState.copy(
-                                currentDestination = MainDestination.Profile
-                            )
                         }
                     )
                 }
@@ -75,7 +70,7 @@ fun MainScreen(){
                     ProfileScreen(
                         onEditProfileClick = {
                             uiState = uiState.copy(
-                                currentDestination = MainDestination.Profile
+                                currentDestination = MainDestination.ProfileSetup
                             )
                         },
                         onSettingsClick = {

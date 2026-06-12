@@ -7,7 +7,6 @@ interface AuthRepository {
     ): Boolean
 
     fun register(
-        name: String,
         email: String,
         password: String
     ): Boolean

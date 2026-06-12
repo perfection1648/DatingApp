@@ -1,17 +1,17 @@
-package com.example.datingapp.screens.login
+package com.example.datingapp.screens.register
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.example.datingapp.repositories.FakeAuthRepository
 
-class LoginStateHolder {
-    private val authRepository = FakeAuthRepository()
+class RegisterStateHolder {
+    private val authRepository =  FakeAuthRepository()
 
-    var uiState by mutableStateOf(LoginUiState())
+    var uiState by mutableStateOf(RegisterUiState())
         private set
 
-    fun onEmailChange(email: String) {
+    fun onEmailChange(email:String) {
         uiState = uiState.copy(
             email = email,
             errorMessage = null
@@ -24,7 +24,15 @@ class LoginStateHolder {
             errorMessage = null
         )
     }
-    fun onLoginClick() {
+
+    fun onRepeatPasswordChange(repeatPassword: String) {
+        uiState = uiState.copy(
+            repeatPassword = repeatPassword,
+            errorMessage = null
+        )
+    }
+
+    fun onRegisterClick() {
         if (uiState.email.isBlank()) {
             uiState = uiState.copy(errorMessage = "Введите email")
             return
@@ -34,13 +42,23 @@ class LoginStateHolder {
             uiState = uiState.copy(errorMessage = "Введите пароль")
             return
         }
-        
+
+        if (uiState.repeatPassword.isBlank()) {
+            uiState = uiState.copy(errorMessage = "Повторите пароль")
+            return
+        }
+
+        if (uiState.password != uiState.repeatPassword) {
+            uiState = uiState.copy(errorMessage = "Пароли не совпадают")
+            return
+        }
+
         uiState = uiState.copy(
             isLoading = true,
             errorMessage = null
         )
 
-        val success = authRepository.login(
+        val success = authRepository.register(
             email = uiState.email,
             password = uiState.password
         )
@@ -48,12 +66,12 @@ class LoginStateHolder {
         uiState = if (success) {
             uiState.copy(
                 isLoading = false,
-                isLoggedIn = true
+                isRegistered = true
             )
-        }  else {
+        } else {
             uiState.copy(
-                isLoading = false,
-                errorMessage = "Неверный email или пароль"
+                isLoading =  false,
+                errorMessage = "Email уже занят"
             )
         }
     }

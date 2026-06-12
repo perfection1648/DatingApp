@@ -3,6 +3,7 @@ package com.example.datingapp.screens.ProfileSetup
 data class ProfileSetupUiState(
     val name: String = "",
     val age: String = "",
+    val city: String = "",
     val about: String = "",
     val photoUrl: String? = null,
     val isLoading: Boolean = false,
