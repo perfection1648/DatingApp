@@ -1,6 +1,7 @@
 package com.example.datingapp.screens.feed
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -57,19 +58,32 @@ fun FeedScreen(
             }
 
             if (currentProfile != null) {
-                ProfileCard(
-                    name = currentProfile.name,
-                    age = currentProfile.age,
-                    city = currentProfile.city,
-                    about = currentProfile.about,
+                SwipeCard(
+                    onSwipeLeft = {stateHolder.onSkipClick()},
+                    onSwipeRight = {stateHolder.onLikeClick()},
                     modifier = Modifier.weight(1f)
-                )
+                ) {
+                    ProfileCard(
+                        name = currentProfile.name,
+                        age = currentProfile.age,
+                        city = currentProfile.city,
+                        about = currentProfile.about,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
             } else {
-                Text(
-                    text = "Анкеты закончились \uD83D\uDE14",
-                    fontSize = 18.sp,
-                    modifier = Modifier.padding(top = 32.dp)
-                )
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Анкеты закончились \uD83D\uDE14",
+                        fontSize = 18.sp,
+                    )
+                }
             }
     }
 
