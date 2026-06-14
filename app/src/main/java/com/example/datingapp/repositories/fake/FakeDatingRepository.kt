@@ -1,7 +1,8 @@
-package com.example.datingapp.repositories
+package com.example.datingapp.repositories.fake
 
 import com.example.datingapp.models.DatingProfile
 import com.example.datingapp.models.Match
+import com.example.datingapp.repositories.DatingRepository
 
 class FakeDatingRepository : DatingRepository {
     private val likedProfileIds = mutableSetOf<String>()

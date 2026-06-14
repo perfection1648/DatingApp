@@ -1,6 +1,7 @@
-package com.example.datingapp.repositories
+package com.example.datingapp.repositories.fake
 
 import com.example.datingapp.models.UserProfile
+import com.example.datingapp.repositories.UserRepository
 
 class FakeUserRepository : UserRepository {
 

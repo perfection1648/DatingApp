@@ -3,12 +3,13 @@ package com.example.datingapp.screens.chat
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.example.datingapp.repositories.FakeChatRepository
-import com.example.datingapp.repositories.FakeDatingRepository
+import com.example.datingapp.repositories.AppRepositories
+import com.example.datingapp.repositories.fake.FakeChatRepository
+import com.example.datingapp.repositories.fake.FakeDatingRepository
 
 class ChatListStateHolder{
-    private val chatRepository = FakeChatRepository()
-    private val datingRepository = FakeDatingRepository()
+    private val chatRepository = AppRepositories.chatRepository
+    private val datingRepository = AppRepositories.datingRepository
 
     var uiState by mutableStateOf(ChatUiState())
         private set

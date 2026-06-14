@@ -3,10 +3,12 @@ package com.example.datingapp.screens.register
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.example.datingapp.repositories.FakeAuthRepository
+import com.example.datingapp.repositories.AppRepositories
+import com.example.datingapp.utils.getPasswordError
+import com.example.datingapp.utils.isValidEmail
 
 class RegisterStateHolder {
-    private val authRepository =  FakeAuthRepository()
+    private val authRepository = AppRepositories.authRepository
 
     var uiState by mutableStateOf(RegisterUiState())
         private set
@@ -38,8 +40,19 @@ class RegisterStateHolder {
             return
         }
 
+        if (!isValidEmail(uiState.email)) {
+            uiState = uiState.copy(errorMessage = "Введите корректный email")
+            return
+        }
+
         if (uiState.password.isBlank()) {
             uiState = uiState.copy(errorMessage = "Введите пароль")
+            return
+        }
+
+        val passwordError = getPasswordError(uiState.password)
+        if (passwordError != null) {
+            uiState = uiState.copy(errorMessage = passwordError)
             return
         }
 

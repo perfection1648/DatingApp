@@ -1,6 +1,7 @@
-package com.example.datingapp.repositories
+package com.example.datingapp.repositories.fake
 
 import com.example.datingapp.models.ChatMessage
+import com.example.datingapp.repositories.ChatRepository
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -90,7 +91,7 @@ class FakeChatRepository : ChatRepository {
     }
 
     private fun getCurrentTime(): String {
-        val formatter = SimpleDateFormat("HH:mm",Locale.getDefault())
+        val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
         return formatter.format(Date())
     }
 }

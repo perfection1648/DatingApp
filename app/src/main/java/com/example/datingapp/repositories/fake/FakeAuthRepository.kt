@@ -1,4 +1,6 @@
-package com.example.datingapp.repositories
+package com.example.datingapp.repositories.fake
+
+import com.example.datingapp.repositories.AuthRepository
 
 class FakeAuthRepository: AuthRepository {
     private val users = mutableMapOf<String, String>()
@@ -6,7 +8,7 @@ class FakeAuthRepository: AuthRepository {
     private var currentUserEmail: String? = null
 
     init {
-        users["test@test.com"] = "123456"
+        users["test@test.com"] = "Test1234"
     }
 
     override fun login(

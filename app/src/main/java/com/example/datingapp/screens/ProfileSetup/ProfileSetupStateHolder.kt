@@ -4,15 +4,27 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.example.datingapp.models.UserProfile
-import com.example.datingapp.repositories.FakeUserRepository
+import com.example.datingapp.repositories.AppRepositories
 import java.util.UUID
 
 class ProfileSetupStateHolder  {
-    private val userRepository = FakeUserRepository()
+    private val userRepository = AppRepositories.userRepository
 
     var uiState by mutableStateOf(ProfileSetupUiState())
         private set
 
+    init {
+        loadExistingProfile()
+    }
+    private fun loadExistingProfile() {
+        val profile = userRepository.getCurrentUserProfile() ?: return
+        uiState = uiState.copy(
+            name = profile.name,
+            age = profile.age.toString(),
+            city = profile.city,
+            about = profile.about
+        )
+    }
     fun onNameChange(name : String) {
         uiState = uiState.copy(
             name = name,
