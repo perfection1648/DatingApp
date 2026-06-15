@@ -36,7 +36,11 @@ fun DatingApp() {
                 )
             }
             Screen.Main -> {
-                MainScreen()
+                MainScreen(
+                    onLogoutClick ={
+                        currentScreen = Screen.Login
+                    }
+                )
             }
 
         }

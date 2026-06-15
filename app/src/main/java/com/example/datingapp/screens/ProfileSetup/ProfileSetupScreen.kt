@@ -1,5 +1,6 @@
 package com.example.datingapp.screens.ProfileSetup
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -31,7 +32,13 @@ fun ProfileSetupScreen(
             onBackClick()
         }
     }
-    AppScreen {
+    AppScreen(
+        contentPadding = PaddingValues(
+            start = 16.dp,
+            end = 16.dp,
+            top = 4.dp,
+        )
+    ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically

@@ -1,10 +1,12 @@
 package com.example.datingapp.screens.settings
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -17,18 +19,28 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.datingapp.components.AppScreen
+import com.example.datingapp.repositories.AppRepositories
 
 @Composable
 fun SettingsScreen(
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onLogoutClick: () -> Unit
 ){
     var notificationsEnabled by remember {
         mutableStateOf(true)
     }
 
-    AppScreen {
+    AppScreen(
+        contentPadding = PaddingValues(
+            start = 16.dp,
+            end = 16.dp,
+            top = 4.dp,
+            bottom = 16.dp
+        )
+    ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
@@ -42,7 +54,23 @@ fun SettingsScreen(
                 )
             }
 
-            Text(text = "Настройки")
+            Text(
+                text = "Настройки",
+                modifier = Modifier.weight(1f)
+            )
+
+            IconButton(
+                onClick = {
+                    AppRepositories.authRepository.logout()
+                    onLogoutClick()
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ExitToApp,
+                    contentDescription = "Выйти",
+                    tint = Color.Red
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(24.dp))

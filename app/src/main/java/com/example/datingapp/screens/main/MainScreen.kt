@@ -21,7 +21,9 @@ import com.example.datingapp.screens.matches.MatchesScreen
 import com.example.datingapp.screens.profile.ProfileScreen
 
 @Composable
-fun MainScreen(){
+fun MainScreen(
+    onLogoutClick: () -> Unit
+){
     var uiState by remember {
         mutableStateOf(MainUiState())
     }
@@ -105,7 +107,8 @@ fun MainScreen(){
                             uiState = uiState.copy(
                                 currentDestination = MainDestination.Profile
                             )
-                        }
+                        },
+                        onLogoutClick = onLogoutClick
                     )
                 }
 

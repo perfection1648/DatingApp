@@ -1,6 +1,7 @@
 package com.example.datingapp.screens.matches
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -24,9 +25,14 @@ fun MatchesScreen(
     val stateHolder = remember { MatchesStateHolder() }
     val uiState = stateHolder.uiState
 
-    AppScreen {
-
-        Spacer(modifier = Modifier.height(16.dp))
+    AppScreen(
+        contentPadding = PaddingValues(
+            start = 16.dp,
+            end = 16.dp,
+            top = 2.dp,
+            bottom = 16.dp
+        )
+    ) {
 
         Text(
             text = "Ваши мэтчи",
