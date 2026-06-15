@@ -20,7 +20,7 @@ import androidx.compose.foundation.lazy.grid.items
 @Composable
 fun MatchesScreen(
 
-    onChatClick: () -> Unit
+    onChatClick: (matchId : String) -> Unit
 ){
     val stateHolder = remember { MatchesStateHolder() }
     val uiState = stateHolder.uiState
@@ -57,7 +57,7 @@ fun MatchesScreen(
                     MatchCard(
                         name = match.matchProfile.name,
                         age = match.matchProfile.age,
-                        onClick = onChatClick
+                        onClick = {onChatClick(match.id)}
                     )
                 }
             }

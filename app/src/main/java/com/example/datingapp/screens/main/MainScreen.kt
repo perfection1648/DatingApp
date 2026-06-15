@@ -57,9 +57,10 @@ fun MainScreen(
 
                 MainDestination.Matches -> {
                     MatchesScreen(
-                        onChatClick = {
+                        onChatClick = {matchId ->
                             uiState = uiState.copy(
-                                currentDestination =  MainDestination.Chat
+                                currentDestination =  MainDestination.Conversation,
+                                chatMatchId = matchId
                             )
                         }
                     )
